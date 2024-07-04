@@ -1,13 +1,13 @@
-const config = require('better-config');
+const config = require("better-config");
 
-config.set('../config.json');
+config.set("../config.json");
 
-const redis = require('../src/daos/impl/redis/redis_client');
-const updateIfLowestScript = require('../src/daos/impl/redis/scripts/update_if_lowest_script');
+const redis = require("../src/daos/impl/redis/redis_client");
+const updateIfLowestScript = require("../src/daos/impl/redis/scripts/update_if_lowest_script");
 
 const client = redis.getClient();
 
-const testSuiteName = 'update_if_lowest_script';
+const testSuiteName = "update_if_lowest_script";
 const testKeyPrefix = `test:${testSuiteName}`;
 
 /* eslint-disable no-undef */
@@ -38,6 +38,7 @@ test(`${testSuiteName}: evalsha example`, async () => {
 
   // Execute script (1 = number of Redis keys).
   const result = await client.evalshaAsync(sha, 1, key, value);
+  // How many subsequent parameters represent the names of Redis key
 
   // Check result.
   expect(result).toBe(1);
@@ -52,7 +53,7 @@ test(`${testSuiteName}: updateIfLowest example`, async () => {
 
   // Execute script using helper function.
   const result = await client.evalshaAsync(
-    updateIfLowestScript.updateIfLowest(key, value),
+    updateIfLowestScript.updateIfLowest(key, value)
   );
 
   // Check result.
@@ -68,7 +69,7 @@ test(`${testSuiteName}: update if lowest`, async () => {
   await updateIfLowestScript.load();
 
   const result = await client.evalshaAsync(
-    updateIfLowestScript.updateIfLowest(testKey, 50),
+    updateIfLowestScript.updateIfLowest(testKey, 50)
   );
 
   // Expect the response to be 1 / truthy (value was updated).
@@ -86,7 +87,7 @@ test(`${testSuiteName}: update if lowest unchanged`, async () => {
   await updateIfLowestScript.load();
 
   const result = await client.evalshaAsync(
-    updateIfLowestScript.updateIfLowest(testKey, 200),
+    updateIfLowestScript.updateIfLowest(testKey, 200)
   );
 
   expect(result).toBeFalsy();
@@ -100,7 +101,9 @@ test(`${testSuiteName}: update if lowest with no key`, async () => {
 
   await updateIfLowestScript.load();
 
-  const result = client.evalshaAsync(updateIfLowestScript.updateIfLowest(testKey, 200));
+  const result = client.evalshaAsync(
+    updateIfLowestScript.updateIfLowest(testKey, 200)
+  );
 
   expect(result).toBeTruthy();
 

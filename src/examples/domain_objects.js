@@ -5,10 +5,10 @@ const site = {
   id: 1,
   capacity: 4.5,
   panels: 3,
-  address: '637 Britannia Drive',
-  city: 'Vallejo',
-  state: 'CA',
-  postalCode: '94591',
+  address: "637 Britannia Drive",
+  city: "Vallejo",
+  state: "CA",
+  postalCode: "94591",
   // Optional
   coordinate: {
     lat: 38.10476999999999,
@@ -30,7 +30,7 @@ const measurement = {
   siteId: 114,
   dateTime: 1563897660,
   value: 4.54,
-  metricUnit: 'whGenerated',
+  metricUnit: "whGenerated",
 };
 
 // Site Stat
