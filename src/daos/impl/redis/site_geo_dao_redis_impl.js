@@ -249,7 +249,7 @@ const findByGeoWithExcessCapacity = async (lat, lng, radius, radiusUnit) => {
   setOperationsPipeline.expire(sitesInRadiusSortedSetKey, 30);
   setOperationsPipeline.expire(sitesInRadiusCapacitySortedSetKey, 30);
 
-  // Execute the set operations commands, we do not need to
+  // Execute the set operations commands, we do not need tow
   // use the responses.
   await setOperationsPipeline.execAsync();
 
